@@ -1,5 +1,7 @@
 package com.bridgelabz.test;
 
+
+
 class MyNode<T>{
     T data;
     MyNode<T> next;
@@ -31,6 +33,24 @@ class Stack<T>{
             top = newNode;
         }
     }
+    public T peek(){
+        if (isEmpty()){
+            throw new IllegalStateException("Stack is empty");
+        }
+        return top.data;
+    }
+
+    public T pop(){
+        if (isEmpty()){
+            throw new IllegalStateException("Stack is empty");
+        }
+        T data = top.data;
+        top = top.next;
+        return data;
+    }
+    boolean isEmpty() {
+        return top == null;
+    }
 
     public void displayElement(){
         MyNode<T> temp = top;
@@ -43,9 +63,9 @@ class Stack<T>{
 
 
 
+
+
 }
-
-
 
 
 
@@ -56,5 +76,12 @@ public class CustomPush {
         integerList.pushElement(30);
         integerList.pushElement(56);
         integerList.displayElement();
+
+        while (!integerList.isEmpty()){
+            System.out.println("Peek: " + integerList.peek());
+            System.out.println("Pop: " + integerList.pop());
+            integerList.displayElement();
+
+        }
     }
 }
