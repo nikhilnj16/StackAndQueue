@@ -24,6 +24,8 @@ class Queue<T>{
         this.rear = null;
     }
 
+
+
     public void enqueueElement(T data){
         MyNode<T> newNode = new MyNode<>(data);
         if(isEmpty()){
@@ -39,6 +41,20 @@ class Queue<T>{
     boolean isEmpty() {
         return front == null && rear == null;
     }
+
+    public T dequeueElement(){
+        if (isEmpty()){
+            throw new IllegalStateException("Queue is empty");
+        }
+            T data = front.data;
+            front = front.next;
+            return data;
+
+
+
+
+    }
+
 
     public void displayElement(){
         MyNode<T> node = front;
@@ -127,6 +143,10 @@ public class CustomPush {
         integerQueue.enqueueElement(70);
         System.out.println("Displaying Queue: ");
         integerQueue.displayElement();
+        while(!integerQueue.isEmpty()){
+            System.out.println("Dequeue: " + integerQueue.dequeueElement());
+            integerQueue.displayElement();
+        }
 
 
     }
