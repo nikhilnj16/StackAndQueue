@@ -43,6 +43,7 @@ class Stack<T>{
 
     //hello testing
     //TODO: fix this later
+    console.log("aadcaca")
 
 
 
@@ -61,3 +62,5 @@ public class CustomPush {
         integerList.displayElement();
     }
 }
+
+
