@@ -113,6 +113,10 @@ class Stack<T>{
         System.out.println("End");
     }
 
+    //hello testing
+    //TODO: fix this later
+    console.log("aadcaca")
+
 
 
 
@@ -151,3 +155,5 @@ public class CustomPush {
 
     }
 }
+
+
