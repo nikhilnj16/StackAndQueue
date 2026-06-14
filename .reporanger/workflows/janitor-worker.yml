@@ -1,0 +1,44 @@
+# Staged by RepoRanger. Move this file to: .github/workflows/janitor-worker.yml
+# See the instructions in the open pull request.
+# This workflow scans for stale branches when triggered by the RepoRanger cron.
+
+name: RepoRanger Janitor
+
+on:
+  workflow_dispatch:
+    inputs:
+      installation_id:
+        description: "GitHub App installation ID (passed by RepoRanger)"
+        required: false
+        type: string
+
+permissions:
+  issues: write
+  contents: write
+
+jobs:
+  janitor-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout user repository
+        uses: actions/checkout@v4
+
+      - name: Checkout RepoRanger bot repository
+        uses: actions/checkout@v4
+        with:
+          repository: nikhilnj16/git_extension
+          path: _reporanger
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install bot dependencies
+        run: pip install PyGithub requests python-dotenv
+
+      - name: Run Janitor scan
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python _reporanger/bot_logic/janitor_worker.py
